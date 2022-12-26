@@ -1,39 +1,49 @@
-function setup() {
-    createCanvas(400, 400);
-    smooth();
-    frameRate(30);
-}
-
-function draw() {
-    background(255);
+function interaction_zoog(p) {
+    p.setup = function setup() {
+        p.createCanvas(400, 400);
+        p.smooth();
+        p.frameRate(30);
+    };
     
-    ellipseMode(CENTER)
-    rectMode(CENTER)
-    
-    // body
-    stroke(0);
-    fill(150);
-    rect(mouseX, mouseY, 20, 100);
+    p.draw = function draw() {
+        let m_x = p.mouseX;
+        let m_y = p.mouseY;
+        let p_m_x = p.pmouseX;
+        let p_m_y = p.pmouseY;
 
-    // head
-    fill(255);
-    ellipse(mouseX, mouseY - 30, 60, 60);
+        p.background(255);
 
-    // eyes
-    fill(mouseX, 0, mouseY);
-    ellipse(mouseX - 19, mouseY - 30, 16, 32);
-    ellipse(mouseX + 19, mouseY - 30, 16, 32);
+        p.ellipseMode(p.CENTER);
+        p.rectMode(p.CENTER);
 
-    // legs
-    stroke(0);
-    line(mouseX - 10, mouseY + 50, pmouseX - 20, pmouseY + 60);
-    line(mouseX + 10, mouseY + 50, pmouseX + 20, pmouseY + 60)
+        // body
+        p.stroke(0);
+        p.fill(150);
+        p.rect(m_x, m_y, 20, 100);
+
+        // head
+        p.fill(255);
+        p.ellipse(m_x, m_y - 30, 60, 60);
+
+        // eyes
+        p.fill(m_x, 0, m_y);
+        p.ellipse(m_x - 19, m_y - 30, 16, 32);
+        p.ellipse(m_x + 19, m_y - 30, 16, 32);
+
+        // legs
+        p.stroke(0);
+        p.line(m_x - 10, m_y + 50, p_m_x - 20, p_m_y + 60);
+        p.line(m_x + 10, m_y + 50, p_m_x + 20, p_m_y + 60);
+    };
+
+    p.mousePressed = function mousePressed() {
+        print("Take me to your leader!")
+    };
+
+    p.touchEnded = function touchEnded() {
+        p.mousePressed();
+    };
 }
 
-function mousePressed() {
-    alert("Take me to your leader!")
-}
-
-function touchEnded() {
-    mousePressed();
-}
+ch3_interaction_zoog = new p5(interaction_zoog,
+                              "ch3_interaction_zoog");

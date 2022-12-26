@@ -1,10 +1,7 @@
 <html>
   <head>
     <!-- Disable the annoying side-of-screen bounce thing on iOS -->
-    <script type="text/javascript">
-        document.addEventListener('touchmove', function(e) {
-            e.preventDefault();
-        }, { passive: false });
+    <script src="disable_touchmove.js">
     </script>
     <!-- Include the p5js libraries -->
     <script src="../third_party/p5.js"></script>

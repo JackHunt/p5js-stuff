@@ -1,6 +1,6 @@
-function hideShow(boxId, btnId) {
+function hideShow(boxId) {
     const box = document.getElementById(boxId);
-    const btn = document.getElementById(btnId);
+    const btn = document.getElementById(boxId + "_btn");
 
     if (box.style.display === 'none') {
         box.style.display = 'block';

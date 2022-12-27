@@ -1,13 +1,33 @@
+let currentlyShowing = false;
+
+document.addEventListener('touchmove',
+                          function(e) {
+                              if (currentlyShowing) {
+                                  e.preventDefault();
+                              }
+                          },
+                          { passive: false });
+
 function hideShow(boxId) {
     const box = document.getElementById(boxId);
     const btn = document.getElementById(boxId + "_btn");
 
-    if (box.style.display === 'none') {
+    const boxes = document.getElementsByTagName('div');
+    for (const b of boxes) {
+        b.style.display = 'none';
+    }
+    
+    const buttons = document.getElementsByTagName('button');
+    for (const b of buttons) {
+        btn.textContent = 'Show';
+    }
+    
+    if (!currentlyShowing) {
         box.style.display = 'block';
         btn.textContent = 'Hide';
+        currentlyShowing = true;
         return;
     }
-
-    box.style.display = 'none';
-    btn.textContent = 'Show';
+    
+    currentlyShowing = false;
 }

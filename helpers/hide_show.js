@@ -9,22 +9,30 @@ document.addEventListener('touchmove',
                           { passive: false });
 
 function hideShow(boxId) {
-    const box = document.getElementById(boxId);
-    const btn = document.getElementById(boxId + "_btn");
-
-    const boxes = document.getElementsByTagName('div');
-    for (const b of boxes) {
+    let boxes = document.getElementsByTagName('div');
+    for (b of boxes) {
         b.style.display = 'none';
     }
     
-    const buttons = document.getElementsByTagName('button');
-    for (const b of buttons) {
-        btn.textContent = 'Show';
+    let buttons = document.getElementsByTagName('button');
+    for (b of buttons) {
+        b.textContent = 'Show';
     }
     
     if (!currentlyShowing) {
+        let box = document.getElementById(boxId);
+        let scripts = box.getElementsByTagName('script')
+        for (s of scripts) {
+            let src = $(s).attr('src');
+            $(s).attr('src', src.split('?')[0] + "?" + Math.floor(Math.random() * 10000000));
+        }
+        $("#" + boxId).load(" #" + boxId);
+        
         box.style.display = 'block';
+
+        btn = document.getElementById(boxId + "_btn");
         btn.textContent = 'Hide';
+
         currentlyShowing = true;
         return;
     }
